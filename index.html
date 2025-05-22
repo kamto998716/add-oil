@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>為伊汶打氣❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color:  #E6FFF0; /* mint background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .character-img {
+            width: 400px; /* 2X larger */
+            margin-bottom: 20px;
+        }
+        
+        .slogan {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        #cheerBtn {
+            background-color: #e57373;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            height: 50px; /* Set initial height same as more button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #moreBtn {
+            background-color: #1565c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            height: 50px; /* Initial height same as cheer button */
+            width: 150px; /* Initial width */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .love-page {
+            display: none;
+        }
+        
+        .love-text {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        .love-img {
+            width: 350px; /* 2.5X larger */
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .slogan {
+                font-size: 20px;
+                padding: 5px;
+                margin-left:5px;
+            }
+            
+            .love-text {
+                font-size: 24px;
+            }
+            
+            #cheerBtn, #moreBtn {
+                padding: 10px 20px;
+                font-size: 16px;
+                height: 45px;
+            }
+            
+            #moreBtn {
+                width: 130px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .slogan {
+                font-size: 18px;
+                padding: 5px;
+                margin-left:5px;
+            }
+            
+            .love-text {
+                font-size: 20px;
+            }
+            
+            .buttons {
+                gap: 10px;
+            }
+            
+            #cheerBtn, #moreBtn {
+                padding: 8px 16px;
+                font-size: 14px;
+                height: 40px;
+            }
+            
+            #moreBtn {
+                width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="cheer-container">
+        <img src="cartoon1.jpg" alt="Cute cartoon character" class="character-img" id="characterImg">
+        <div class="slogan" id="slogan">伊汶已經好努力，toto永遠愛你❤️</div>
+        <div class="buttons">
+            <button id="cheerBtn">一定掂</button>
+            <button id="moreBtn">再來一句</button>
+        </div>
+    </div>
+    
+    <div class="love-page" id="love-page">
+        <div class="love-text">Toto永遠支持伊汶!! (>_<)♡</div>
+        <img src="love.jpg" alt="Love cartoon" class="love-img">
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="winner.mp3" type="audio/mpeg">
+    </audio>
+    
+    <audio id="loveMusic">
+        <source src="happy.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Elements
+        const cheerContainer = document.getElementById('cheer-container');
+        const lovePage = document.getElementById('love-page');
+        const cheerBtn = document.getElementById('cheerBtn');
+        const moreBtn = document.getElementById('moreBtn');
+        const characterImg = document.getElementById('characterImg');
+        const sloganElement = document.getElementById('slogan');
+        const bgMusic = document.getElementById('bgMusic');
+        const loveMusic = document.getElementById('loveMusic');
+        
+        // Image paths - replace with your actual image paths
+        const imagePaths = [
+            'cartoon1.jpg', 'cartoon2.jpg', 'cartoon3.jpg', 'cartoon4.jpg', 'cartoon5.jpg',
+            'cartoon6.jpg', 'cartoon7.jpg', 'cartoon8.jpg', 'cartoon9.jpg', 'cartoon10.jpg',
+            'cartoon11.jpg', 'cartoon12.jpg', 'cartoon13.jpg', 'cartoon14.jpg', 'cartoon15.jpg',
+            'cartoon16.jpg', 'cartoon17.jpg', 'cartoon18.jpg'
+        ];
+        
+        // Array of encouraging messages
+        const slogans = [
+            "伊汶已經好努力，toto永遠愛你❤️",
+            "有toto陪住你，我們慢慢來🥰",
+            "toto話伊汶已經做得好好了❤️❤️🥰",
+            "toto話伊汶已經做左好多好多🫶🏻",
+            "連伊汶唔識，其他人更加都唔會識💪",
+            "Toto養伊汶🥰🥰❤️🫶🏻",
+            "伊汶真係好努力好努力，toto一直都望住🥹😭🫶🏻",
+            "過多陣，一切就會過去了，唔洗再理了🥳🥳",
+            "toto支持伊汶❤️",
+            "伊汶加油！你一定得㗎！💖",
+            "伊汶已經好勇敢，toto好欣賞你🥰",
+            "伊汶係最棒的，toto相信你💕",
+            "伊汶每日都進步緊，toto見到晒🌈",
+            "伊汶唔使擔心，有toto喺度陪你💞",
+            "伊汶做咩都得，因為你好叻！🌟",
+            "伊汶嘅努力，toto都睇在眼裡❤️",
+            "伊汶唔洗怕，toto永遠都會支持你🥰",
+            "伊汶係toto心目中最堅強嘅人🫶🏻",
+            "伊汶繼續加油，toto為你打氣！💪",
+            "伊汶已經好勁！✨",
+            "伊汶嘅笑容係toto嘅動力💖",
+            "伊汶唔洗諗太多，有toto陪你一齊面對🥰",
+            "伊汶已經好叻，toto好以你為榮🥹",
+            "伊汶每日都比前一日更強大💪",
+            "伊汶嘅堅持令toto好感動❤️",
+            "伊汶係toto心目中嘅第一名🏆",
+            "伊汶唔洗驚，有咩事toto同你一齊解決🫶🏻",
+            "伊汶嘅努力一定會有回報，toto相信你💖",
+            "伊汶已經做得好好，休息一下都冇問題🥰",
+            "伊汶嘅成長，toto都見到晒💕",
+            "伊汶唔洗太大壓力，慢慢嚟，最緊要開心🌈",
+            "伊汶每一步都好重要，toto為你自豪🥹",
+            "伊汶係最勇敢嘅女仔，toto好愛你❤️",
+            "伊汶嘅毅力令toto好佩服💪",
+            "伊汶加油！toto永遠都喺你身邊💖"
+        ];
+
+        
+        let currentImageIndex = 0;
+        let currentSloganIndex = 0;
+        let btnSizeIncrease = 0;
+        let clickCount = 0;
+        const maxClicks = 35; // Button B will disappear after 35 clicks
+        
+        // Flag to track if music has been started
+        let musicStarted = false;
+        
+        // Function to handle first-time music play
+        function startBackgroundMusic() {
+            if (!musicStarted) {
+                bgMusic.play().catch(e => console.log("Still couldn't play music"));
+                musicStarted = true;
+            }
+        }
+        
+        // Try to play music automatically when page loads
+        window.addEventListener('load', function() {
+            // Try to play background music
+            bgMusic.play().then(() => {
+                musicStarted = true;
+            }).catch(e => {
+                console.log("Autoplay prevented. User interaction needed.");
+                // We'll handle this in the button clicks instead of adding a document listener
+            });
+        });
+        
+        // When cheer button is clicked
+        cheerBtn.addEventListener('click', function() {
+            cheerContainer.style.display = 'none';
+            lovePage.style.display = 'block';
+            
+            // Always pause background music regardless of whether it's playing
+            bgMusic.pause();
+            
+            // Play love music
+            loveMusic.play().catch(e => {
+                console.log("Couldn't play love music automatically");
+                // Try again with user interaction
+                document.addEventListener('click', function playLoveMusic() {
+                    loveMusic.play();
+                    document.removeEventListener('click', playLoveMusic);
+                }, { once: true });
+            });
+            
+            // Mark music as started
+            musicStarted = true;
+        });
+        
+        // When more button is clicked
+        moreBtn.addEventListener('click', function() {
+            // Start background music if it hasn't started yet
+            startBackgroundMusic();
+            
+            clickCount++;
+            
+            // Increase size of cheer button
+            btnSizeIncrease += 10;
+            cheerBtn.style.padding = `${15 + btnSizeIncrease}px ${30 + btnSizeIncrease}px`;
+            cheerBtn.style.fontSize = `${18 + btnSizeIncrease/2}px`;
+            
+            // Decrease height, width, and font size of more button
+            const currentHeight = parseInt(window.getComputedStyle(moreBtn).height);
+            const currentWidth = parseInt(window.getComputedStyle(moreBtn).width);
+            const newHeight = Math.max(20, currentHeight - 5); // Don't let it get smaller than 20px
+            const newWidth = Math.max(50, currentWidth - 5); // Don't let it get narrower than 50px
+            
+            moreBtn.style.height = newHeight + 'px';
+            moreBtn.style.width = newWidth + 'px';
+            moreBtn.style.fontSize = Math.max(8, 16 - clickCount/2) + 'px'; // Decrease font size, min 8px
+            
+            // Change to next image
+            currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+            characterImg.src = imagePaths[currentImageIndex];
+            
+            // Change to next slogan
+            currentSloganIndex = (currentSloganIndex + 1) % slogans.length;
+            sloganElement.textContent = slogans[currentSloganIndex];
+            
+            // Hide more button after max clicks
+            if (clickCount >= maxClicks) {
+                moreBtn.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
